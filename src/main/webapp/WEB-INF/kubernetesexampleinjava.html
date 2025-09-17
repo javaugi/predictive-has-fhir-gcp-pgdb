@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+        
+</br> Here's an example demonstrating how to deploy a simple Java application on Kubernetes: 
+</br> 1. Create a Simple Java Application 
+</br> // App.java
+public class App {
+    public static void main(String[] args) {
+        System.out.println("Hello, Kubernetes!");
+    }
+}
+
+</br> 2. Package the Application as a JAR file 
+</br> First, compile the Java code: 
+</br> javac App.java
+
+</br> Then, create a JAR file: 
+</br> jar cf app.jar App.class
+
+</br> 3. Create a Dockerfile 
+</br> To containerize the application, create a Dockerfile: 
+</br> # Dockerfile
+</br> FROM openjdk:17-jdk-slim
+</br> WORKDIR /app
+</br> COPY app.jar .
+</br> CMD ["java", "-jar", "app.jar"]
+
+</br> 4. Build the Docker Image 
+</br> Build the Docker image using the following command: 
+</br> docker build -t my-java-app:latest .
+
+</br> 5. Push the Docker Image to a Repository 
+</br> Tag the image and push it to a container registry (e.g., Docker Hub): 
+</br> docker tag my-java-app:latest your-docker-username/my-java-app:latest
+</br> docker push your-docker-username/my-java-app:latest
+
+</br> 6. Create a Kubernetes Deployment 
+</br> Define a Kubernetes Deployment in a YAML file (e.g., deployment.yaml): 
+</br> # deployment.yaml
+</br> apiVersion: apps/v1
+</br> kind: Deployment
+</br> metadata:
+</br>   name: my-java-app-deployment
+</br> spec:
+</br>   replicas: 3
+</br>   selector:
+</br>   matchLabels:
+</br>       app: my-java-app
+</br>   template:
+</br>     metadata:
+</br>       labels:
+</br>         app: my-java-app
+</br>     spec:
+</br>       containers:
+</br>       - name: my-java-app
+</br>         image: your-docker-username/my-java-app:latest
+</br>         ports:
+</br>         - containerPort: 8080
+</br> 
+</br> 7. Create a Kubernetes Service 
+</br> Define a Kubernetes Service to expose the application in a YAML file (e.g., service.yaml): 
+</br> # service.yaml
+</br> apiVersion: v1
+</br> kind: Service
+</br> metadata:
+</br>   name: my-java-app-service
+</br> spec:
+</br>   selector:
+</br>     app: my-java-app
+</br>   ports:
+</br>   - protocol: TCP
+</br>     port: 80
+</br>     targetPort: 8080
+</br>   type: LoadBalancer
+</br> 
+</br> 8. Apply the Kubernetes Configuration 
+</br> Apply the Deployment and Service to the Kubernetes cluster: 
+</br> kubectl apply -f deployment.yaml
+</br> kubectl apply -f service.yaml
+</br> 
+</br> 9. Verify the Deployment 
+</br> Check if the pods are running: 
+</br> kubectl get pods
+
+</br> Check the service: 
+</br> kubectl get service
+</br> 
+</br> Generative AI is experimental.
+</br> 
+        
+        </div>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+#Enable HTTPS:
+#
+#Request an ACM certificate for espan360.com
+#
+#Update the ingress annotation with the certificate ARN
+#
+#This pipeline will automatically build, push Docker images to ECR, and deploy to EKS whenever code is pushed to the main branch. 
+#   The application will be accessible at https://espan360.com.

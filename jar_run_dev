@@ -1,0 +1,6 @@
+#!/bin/sh
+reset
+echo "mvn clean package"
+mvn --version
+mvn clean package
+java -jar target/predictive-has.jar --spring.profiles.active=DEV

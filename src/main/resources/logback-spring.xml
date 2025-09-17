@@ -1,0 +1,28 @@
+<configuration>
+    <springProperty scope="context" name="LOG_PATTERN" source="logging.pattern.level" default="%5p"/>
+    <!-- Register custom PHI converter -->
+    <conversionRule conversionWord="phiMsg" converterClass="com.sisllc.instaiml.util.converters.PHIConverter"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="com.sisllc.instaiml.util.filters.PHILoggingFilter"/>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%X{X-Correlation-Id}] %-5level [%thread] %logger{36} - %phiMsg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <filter class="com.sisllc.instaiml.util.filters.PHILoggingFilter"/>
+        <file>logs/app.log</file>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] [%X{X-Correlation-Id}] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.sisllc.instaiml" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

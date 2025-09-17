@@ -1,0 +1,5 @@
+#Push to GitHub:
+#bash
+git add .
+git commit -m "Initial deployment setup"
+git push origin main

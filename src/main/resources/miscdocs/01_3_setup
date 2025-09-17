@@ -1,0 +1,4 @@
+#Create ECR Repositories:
+#bash
+aws ecr create-repository --repository-name espan360/backend
+aws ecr create-repository --repository-name espan360/frontend

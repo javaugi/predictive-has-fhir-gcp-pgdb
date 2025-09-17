@@ -1,0 +1,5 @@
+#Configure GitHub Secrets:
+
+AWS_ACCESS_KEY_ID - AWS access key with EKS and ECR permissions
+AWS_SECRET_ACCESS_KEY - Corresponding secret key
+DB_PASSWORD - PostgreSQL database password

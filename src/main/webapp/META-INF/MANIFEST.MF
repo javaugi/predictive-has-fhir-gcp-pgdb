@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Created-By: Maven JAR Plugin 3.4.2
+Build-Jdk-Spec: 21
+Implementation-Title: jinvidia-saas-carloner
+Implementation-Version: 1.0.0-SNAPSHOT
+Main-Class: com.spring5.MyApplication
+
+

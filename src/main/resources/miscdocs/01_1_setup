@@ -1,0 +1,7 @@
+#5. Setup Instructions
+#Initialize Infrastructure:
+#bash
+
+cd infra
+terraform init
+terraform apply
