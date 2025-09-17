@@ -402,7 +402,14 @@
             <artifactId>java-dotenv</artifactId>
             <version>5.2.2</version>
         </dependency>    
-                                                
+        <!--
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.2.0</version>
+        </dependency>       
+        --> 
+                                                                               
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-core</artifactId>
