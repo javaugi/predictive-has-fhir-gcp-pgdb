@@ -1,4 +1,11 @@
 .idea
 *.iml
 target
-
+.env
+*~
+nb-configuration.xml
+**/nbactions.xml
+*.cache
+**/.classpath
+**/.project
+**/.settings/**
