@@ -2,6 +2,7 @@
 *.iml
 target
 .env
+*.env*
 *~
 nb-configuration.xml
 **/nbactions.xml
