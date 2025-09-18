@@ -5,7 +5,7 @@
 package com.sisllc.instaiml.service.fhir;
 
 import com.sisllc.instaiml.util.PIIUtils;
-import java.time.Instant;
+import java.time.OffsetDateTime;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +22,6 @@ public class AuditService {
 
         // In production, write to secure audit store with proper access control & retention policies
         System.out.printf("[%s] AUDIT %s patient=%s model=%s prov=%s prompt=%s response=%s%n",
-            Instant.now(), operation, patientId, modelName, provenance, redactedPrompt, redactedResponse);
+            OffsetDateTime.now(), operation, patientId, modelName, provenance, redactedPrompt, redactedResponse);
     }
 }

@@ -13,7 +13,6 @@ import com.sisllc.instaiml.repository.fhir.PatientEventRepository;
 import org.hl7.fhir.r4.model.Claim;
 import org.hl7.fhir.r4.model.Encounter;
 
-import java.time.Instant;
 import java.time.OffsetDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

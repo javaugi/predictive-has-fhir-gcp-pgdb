@@ -1,0 +1,11 @@
+{
+  "instances": [
+    {
+      "department": "cardiology",
+      "day_of_week": "MONDAY",
+      "month": "7",
+      "is_holiday": false,
+      "avg_no_show_rate_prev_month": 0.15
+    }
+  ]
+}

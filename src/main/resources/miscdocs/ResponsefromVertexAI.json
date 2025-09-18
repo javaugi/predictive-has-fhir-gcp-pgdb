@@ -1,0 +1,10 @@
+{
+  "predictions": [
+    {
+      "no_show_probability": [0.22],
+      "expected_appointments": 145,
+      "predicted_no_shows": 32
+    }
+  ],
+  "deployedModelId": "your-model-id"
+}

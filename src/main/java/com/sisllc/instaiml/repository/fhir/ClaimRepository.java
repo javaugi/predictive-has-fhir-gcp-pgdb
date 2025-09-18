@@ -4,7 +4,6 @@
  */
 package com.sisllc.instaiml.repository.fhir;
 
-import java.time.LocalDate;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.data.r2dbc.repository.Query;
 import com.sisllc.instaiml.model.fhir.*;

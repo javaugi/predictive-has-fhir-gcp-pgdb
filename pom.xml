@@ -48,6 +48,8 @@
         
         <io.projectreactor.version>2024.0.10</io.projectreactor.version>
         <spring-cloud-gcp.version>7.3.0</spring-cloud-gcp.version>     
+        <gcp-libraries-bom.version>26.68.0</gcp-libraries-bom.version>     
+        <google-cloud-bom.version>0.249.0</google-cloud-bom.version>
         <io.confluent.version>8.0.0</io.confluent.version>
     </properties>
 
@@ -56,18 +58,59 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>       
-        <!--
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter</artifactId>
-            <version>${spring-cloud-gcp.version}</version>
         </dependency> 
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>spring-cloud-gcp-starter-sql-postgres-r2dbc</artifactId>
-            <version>${spring-cloud-gcp.version}</version>
+        </dependency>   
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-core</artifactId>
+        </dependency>
+        <!-- GCP Auth for service account credentials -->
+        <dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-oauth2-http</artifactId>
+        </dependency>
+                    
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </exclusion>
+            </exclusions>            
         </dependency>        
-        -->            
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>r2dbc-postgresql</artifactId>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency> 
+        -->
+        <dependency>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-pool</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-aiplatform</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
@@ -98,29 +141,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>        
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-data-jpa</artifactId>
-                </exclusion>
-            </exclusions>            
-        </dependency>        
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>r2dbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency> 
-        <dependency>
-            <groupId>io.r2dbc</groupId>
-            <artifactId>r2dbc-pool</artifactId>
-        </dependency>
         <!-- OpenAI Client -->
         <dependency>
             <groupId>com.pgvector</groupId>
@@ -341,13 +361,18 @@
         
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
+            <artifactId>org.hl7.fhir.r4</artifactId>
+            <version>${hapi.fhir.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>
             <version>${hapi.fhir.version}</version>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>org.hl7.fhir.r4</artifactId>
-            <version>${hapi.fhir.core.version}</version>
+            <artifactId>hapi-fhir-structures-r4</artifactId>
+            <version>${hapi.fhir.version}</version>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
@@ -356,7 +381,7 @@
         </dependency>        
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
-            <artifactId>hapi-fhir-structures-r4</artifactId>
+            <artifactId>hapi-fhir-client</artifactId>
             <version>${hapi.fhir.version}</version>
         </dependency>
             
@@ -509,6 +534,21 @@
                 <scope>import</scope>
             </dependency>     
             <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>libraries-bom</artifactId>
+                <version>${gcp-libraries-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>            
+            <dependency>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>google-cloud-bom</artifactId>
+                <version>${google-cloud-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            
+            <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
                 <version>${io.projectreactor.version}</version>
@@ -530,6 +570,7 @@
                 <artifactId>tensorflow-java</artifactId>
                 <version>${org.tensorflow.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
                             
             <!-- An open-source implementation of the FHIR specification in Java. -->   
@@ -538,12 +579,14 @@
                 <artifactId>hapi-fhir</artifactId>
                 <version>${hapi.fhir.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>ca.uhn.hapi.fhir</groupId>
                 <artifactId>org.hl7.fhir.core</artifactId>
                 <version>${hapi.fhir.core.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>     
                        
             <dependency>
@@ -551,6 +594,7 @@
                 <artifactId>kafka-serde-tools-package</artifactId>
                 <version>${io.confluent.version}</version>
                 <type>pom</type>
+                <scope>import</scope>
             </dependency>    
                                  
         </dependencies>
@@ -670,5 +714,9 @@
             <url>https://central.sonatype.com/repository/maven-snapshots/</url>
             <releases><enabled>false</enabled></releases>
         </repository>
+        <repository>
+             <id>google-cloud-maven-repo</id>
+             <url>https://maven.google.com</url>
+         </repository>        
     </repositories>        
 </project>
