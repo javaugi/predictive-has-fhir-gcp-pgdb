@@ -682,7 +682,36 @@
                     </goals>
                   </execution>
                 </executions>                 
-			</plugin>                         
+			</plugin>        
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <useModulePath>false</useModulePath>
+                    <failIfNoSpecifiedTests>false</failIfNoSpecifiedTests>
+                </configuration>
+                <!--
+                make @ParameterizedTest work
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.5.2</version>
+                    </dependency>
+                </dependencies>
+                -->
+            </plugin>                
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <classpathScope>runtime</classpathScope>
+                    <longClasspath>true</longClasspath>
+                </configuration>
+            </plugin>                                               
         </plugins>
     </build>
     
